@@ -1,0 +1,631 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="Admin" %>
+
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STOCK | Dashboard </title>
+
+  <link rel="icon" type="image/x-icon" href="../dist/img/favicon.ico">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+    <!-- Toastr -->
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+  <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+     <!-- DataTables -->
+    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+ <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+<!-- daterange picker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- BS Stepper -->
+ <%-- <link rel="stylesheet" href="../plugins/bs-stepper/css/bs-stepper.min.css">--%>
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="../plugins/dropzone/min/dropzone.min.css">
+<%-- <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">--%>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="../plugins/jsgrid/jsgrid-theme.min.css">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+   <%-- <script src="../plugins/summernote/summernote-bs4.min.js"></script>--%>
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+
+     
+       <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge" id="lblCount"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="DLMSG">
+        </div>
+      </li>
+     <%-- <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="far fa-bell"></i>
+    <span class="badge bg-warning navbar-badge">15</span>
+</a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>--%>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+     <%-- <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>--%>
+<li class="nav-item">
+        <a class="nav-link" data-slide="true" href="../logout.aspx" role="button">
+          <i class="fas fa-power-off"></i>
+        </a>
+      </li>
+        
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <%--<img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">--%>
+      <span class="brand-text font-weight-dark">STOCK</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+<asp:Image ID="ImageAdmin1" class="img-circle elevation-2" alt="User Image" runat="server" />
+          
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"><asp:Label runat="server" ID="lbladminName1"></asp:Label> &nbsp;&nbsp;<i class="fas fa-circle text-success"></i>
+</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" runat="server" id="menuitem">   
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="height:auto;">
+    <!-- Content Header (Page header) -->
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+  </asp:ContentPlaceHolder>
+    
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+       
+        <form id="frm1" runat="server"> <asp:ScriptManager runat="server" ID="script1"></asp:ScriptManager>
+          
+  <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+
+  </asp:ContentPlaceHolder></form>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer" style="position:static;">
+    <strong>Copyright &copy; 2024-2025 <a href="#">STOCK</a>.</strong> 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <i class='nav-icon far fa-circle text-info'></i>  Last Login : <asp:Label ID="LblLastLogin" runat="server" Text=""></asp:Label>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <i class='nav-icon far fa-circle text-info'></i>  Total Login : <asp:Label ID="LblTotalLogin" runat="server" Text=""></asp:Label>
+
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.2.0
+    </div>
+  </footer>
+</div>
+
+
+
+
+
+       <div class="modal modal-warning fade" id="modal-warning" >
+          <div class="modal-dialog" >
+            <div class="modal-content" style="background-color:#c15609;">
+              <div class="modal-header">
+                
+                <h4 class="modal-title">Warning !</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body" >
+               
+              </div>
+              <div class="modal-footer">
+               
+                <button type="button" class="btn btn-outline"  data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="../plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="../plugins/raphael/raphael.min.js"></script>
+<script src="../plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="../plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="../plugins/chart.js/Chart.min.js"></script>
+
+<%--<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>--%>
+<%--<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="../dist/js/pages/dashboard2.js"></script>--%>
+
+  
+
+    <!-- dropzonejs -->
+<script src="../plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- DataTables  & Plugins -->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<%--<script src=".../plugins/jszip/jszip.min.js"></script>--%>
+<%--<script src=".../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../plugins/pdfmake/vfs_fonts.js"></script>--%>
+<script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="../plugins/moment/moment.min.js"></script>
+<script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- BS-Stepper -->
+<%--<script src="../plugins/bs-stepper/js/bs-stepper.min.js"></script>--%>
+    <!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+    <!-- AdminLTE App -->
+<script src="../dist/js/adminlte.js"></script>
+<!-- PAGE PLUGINS -->
+    <!-- date-range-picker -->
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- jQuery Mapael -->
+<script src="../plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="../plugins/raphael/raphael.min.js"></script>
+<script src="../plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="../plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="../plugins/chart.js/Chart.min.js"></script>
+    <!-- Toastr -->
+<script src="../plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<%--<script src="../dist/js/demo.js"></script>--%>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<%--<script src="../dist/js/pages/dashboard2.js"></script>--%>
+   
+
+    <script>
+        jQuery.noConflict();
+        $(function () {
+            BindMSG();
+            
+        });
+        $(document).ready(function () {
+            $('#txtSregDate').prop('readonly', true);
+            $('#txtSregTime').prop('readonly', true);
+            $('#txtERegDate').prop('readonly', true);
+            $('#txtERegTime').prop('readonly', true);
+            $('#txtcontestStartDate').prop('readonly', true);
+            $('#txtcontestStartTime').prop('readonly', true);
+        });
+
+
+
+        function ShowWarningMessage(s) {
+            var msg = s;
+            $('#modal-warning').modal('toggle');
+            $('#modal-warning').modal('show');
+            $(".modal-body").text(msg);
+        }
+        function ShowContest() {
+            $('#modal-lg').modal('toggle');
+            $('#modal-lg').modal('show');
+        }
+      
+
+
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'MM/ DD / YYYY'
+            });
+            $('#reservationdate1').datetimepicker({
+                format: 'MM/ DD / YYYY'
+            });
+            $('#reservationdate2').datetimepicker({
+                format: 'MM/ DD / YYYY'
+            });
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'HH:mm'
+            })
+            $('#timepicker1').datetimepicker({
+                format: 'HH:mm'
+            })
+            $('#timepicker2').datetimepicker({
+                format: 'HH:mm'
+            })
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+            var startDate = moment().startOf('month');
+            var EndDate = moment().endOf('month'); 
+            //Date range picker
+            $('#reservation').daterangepicker({
+                startDate: startDate,
+                endDate: EndDate,
+
+            })
+            $('#reservation1').daterangepicker({
+                startDate: startDate,
+                endDate: EndDate,
+
+            })
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+           
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+        })
+        //// BS-Stepper Init
+        //document.addEventListener('DOMContentLoaded', function () {
+        //    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        //})
+
+        // DropzoneJS Demo Code Start
+        Dropzone.autoDiscover = false
+
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+       // previewNode.id = ""
+        //var previewTemplate = previewNode.parentNode.innerHTML
+        //previewNode.parentNode.removeChild(previewNode)
+
+        //var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+        //    url: "/target-url", // Set the url
+        //    thumbnailWidth: 80,
+        //    thumbnailHeight: 80,
+        //    parallelUploads: 20,
+        //    previewTemplate: previewTemplate,
+        //    autoQueue: false, // Make sure the files aren't queued until manually added
+        //    previewsContainer: "#previews", // Define the container to display the previews
+        //    clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        //})
+
+        //myDropzone.on("addedfile", function (file) {
+        //    // Hookup the start button
+        //    file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file) }
+        //})
+
+        // Update the total progress bar
+        //myDropzone.on("totaluploadprogress", function (progress) {
+        //    document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        //})
+
+        //myDropzone.on("sending", function (file) {
+        //    // Show the total progress bar when upload starts
+        //    document.querySelector("#total-progress").style.opacity = "1"
+        //    // And disable the start button
+        //    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        //})
+
+        // Hide the total progress bar when nothing's uploading anymore
+        //myDropzone.on("queuecomplete", function (progress) {
+        //    document.querySelector("#total-progress").style.opacity = "0"
+        //})
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        //document.querySelector("#actions .start").onclick = function () {
+        //    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        //}
+        //document.querySelector("#actions .cancel").onclick = function () {
+        //    myDropzone.removeAllFiles(true)
+        //}
+ 
+
+        function BindMSG() {
+            var DLMSG = $("#DLMSG");
+           
+            DLMSG.html('');
+            var HTML_FOR = '';
+            var sno = 1;
+            HTML_FOR = HTML_FOR + '<div class="card-body table-responsive p-0" style="height: 300px;">';
+            $.ajax({
+                type: "POST",
+                url: "../Admin/Default.aspx/BindMSG",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $(response.d).find('Table1').each(function (index) {
+                        var Name = $(this).find('Name').text();
+                        var Mobile = $(this).find('Mobile').text();
+                        var Email = $(this).find('Email').text();
+                        var Message = $(this).find('Message').text();
+                        var CreateDate = $(this).find('CreateDate').text();
+                        var ContactUSID = $(this).find('ContactUSID').text();
+
+                        HTML_FOR = HTML_FOR + '<a href="../Admin/MessageView.aspx?ContactUSID=' + ContactUSID +'" Target="Blank" class="dropdown-item">';
+                        HTML_FOR = HTML_FOR + ' <div class="media">';
+                        HTML_FOR = HTML_FOR + '<span class="img-size-50 mr-3 img-circle" Style="Font-Size:30px;">' + getChars(Name) + '</span>';
+                        HTML_FOR = HTML_FOR + '<div class="media-body">';
+                        HTML_FOR = HTML_FOR + '<h3 class="dropdown-item-title">';
+                        HTML_FOR = HTML_FOR + Name;
+                        HTML_FOR = HTML_FOR + '<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>';
+                        HTML_FOR = HTML_FOR + '</h3>';
+                        HTML_FOR = HTML_FOR + '<p class="text-sm" >' + truncateText(Message,40) + '</p>';
+                        HTML_FOR = HTML_FOR + '<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> ' + timeAgo(CreateDate) +' </p>';
+                        HTML_FOR = HTML_FOR + '</div>';
+                        HTML_FOR = HTML_FOR + ' </div>';
+                        HTML_FOR = HTML_FOR + '  </a>';
+                        HTML_FOR = HTML_FOR + '  <div class="dropdown-divider"></div>'; 
+                        
+                        sno++;
+                        
+                    });
+                    $("#lblCount").html(sno-1);
+                    HTML_FOR = HTML_FOR + '<a href="../Admin/MessageView.aspx" Target="Blank" class="dropdown-item dropdown-footer">See All Messages</a>';
+                    HTML_FOR = HTML_FOR + ' </div>';
+                    DLMSG.html(HTML_FOR);
+
+                }
+            });
+            
+        }
+        function timeAgo(input) {
+            const date = (input instanceof Date) ? input : new Date(input);
+            const formatter = new Intl.RelativeTimeFormat('en');
+            const ranges = {
+                years: 3600 * 24 * 365,
+                months: 3600 * 24 * 30,
+                weeks: 3600 * 24 * 7,
+                days: 3600 * 24,
+                hours: 3600,
+                minutes: 60,
+                seconds: 1
+            };
+            const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+            for (let key in ranges) {
+                if (ranges[key] < Math.abs(secondsElapsed)) {
+                    const delta = secondsElapsed / ranges[key];
+                    return formatter.format(Math.round(delta), key);
+                }
+            }
+        }
+        function getChars(s) {
+            var str = "";
+            var temp = "";
+            for (var i = s.length - 1; i > 0; i--) {
+                if (s[i].match(/[a-zA-Z]/) && s[i - 1] === ' ') {
+                    temp += s[i];
+                }
+            }
+            str += s[0];
+            for (var i = temp.length - 1; i >= 0; i--) {
+                str += temp[i];
+            }
+            return str;
+        }
+        function truncateText(inputString, maxLength) {
+            var truncatedText = inputString;
+            if (truncatedText.length > maxLength) {
+                truncatedText = truncatedText.substring(0, maxLength) + "...";
+            }
+            return truncatedText;
+        }
+
+       
+
+    </script>
+</body>
+</html>
