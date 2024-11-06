@@ -575,13 +575,35 @@
      }
 
      function startCamera() {
-          //Logic to start the camera feed and scan barcode
-         document.getElementById("cameraFeed").style.display = "block";
+         //Logic to start the camera feed and scan barcode
+         //document.getElementById("cameraFeed").style.display = "block";
+         //added part
+         const videoElement = document.getElementById("cameraFeed");
+         const barcodeLabel = document.getElementById("scannedBarcodeLabel");
+          //Attempt to start the camera feed
+             navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                 .then(function (stream) {
+                     videoElement.srcObject = stream; // Connect camera feed to video element
+                     barcodeLabel.textContent = "Scanning..."; // Update the label text
+                 })
+                 .catch(function (err) {
+                     console.error("Error starting camera: ", err);
+                     alert('Error accessing the camera.');
+                 });
      }
 
      function stopCamera() {
-          //Logic to stop the camera feed
-         document.getElementById("cameraFeed").style.display = "none";
+         //Logic to stop the camera feed 
+          //added const 
+         const videoElement = document.getElementById("cameraFeed").style.display = "none";
+         //added part
+         // Stop the video stream
+             const stream = videoElement.srcObject;
+             if (stream) {
+                 const tracks = stream.getTracks();
+                 tracks.forEach(track => track.stop()); // Stop all tracks
+             }
+             videoElement.srcObject = null; // Disconnect the video feed
      }
      const video = document.getElementById('video');
      const barcodeResult = document.getElementById('barcodeResult');
